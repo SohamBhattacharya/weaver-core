@@ -454,11 +454,15 @@ def evaluate_regression(model, test_loader, dev, epoch, for_training=True, loss_
 
 class TensorboardHelper(object):
 
-    def __init__(self, tb_comment, tb_custom_fn):
-        self.tb_comment = tb_comment
+    #def __init__(self, tb_comment, tb_custom_fn):
+    def __init__(self, tb_dir, tb_custom_fn):
+        self.tb_dir = tb_dir
+        #self.tb_comment = tb_comment
         from torch.utils.tensorboard import SummaryWriter
-        self.writer = SummaryWriter(comment=self.tb_comment)
-        _logger.info('Create Tensorboard summary writer with comment %s' % self.tb_comment)
+        #self.writer = SummaryWriter(comment=self.tb_comment)
+        self.writer = SummaryWriter(log_dir=self.tb_dir)
+        #_logger.info('Create Tensorboard summary writer with comment %s' % self.tb_comment)
+        _logger.info('Create Tensorboard summary writer %s' % self.tb_dir)
 
         # initiate the batch state
         self.batch_train_count = 0

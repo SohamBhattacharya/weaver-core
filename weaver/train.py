@@ -9,6 +9,7 @@ import argparse
 import functools
 import numpy as np
 import math
+import random
 import torch
 
 from torch.utils.data import DataLoader
@@ -16,15 +17,18 @@ from weaver.utils.logger import _logger, _configLogger
 from weaver.utils.dataset import SimpleIterDataset
 from weaver.utils.import_tools import import_module
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(formatter_class = argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--regression-mode', action='store_true', default=False,
                     help='run in regression mode if this flag is set; otherwise run in classification mode')
 parser.add_argument('-c', '--data-config', type=str, default='data/ak15_points_pf_sv_v0.yaml',
                     help='data config YAML file')
+parser.add_argument('--infile-prefix', type = str, default="",
+                    help='Prefix for the training/testing files. For e.g. root://dcache-cms-xrootd.desy.de:/'
+                    )
 parser.add_argument('-i', '--data-train', nargs='*', default=[],
                     help='training files; supported syntax:'
                          ' (a) plain list, `--data-train /path/to/a/* /path/to/b/*`;'
-                         ' (b) (named) groups [Recommended], `--data-train a:/path/to/a/* b:/path/to/b/*`,'
+                         ' (b) (named) groups [Recommended], `--data-train a:/path/to/a/* b:/path/to/b/*` OR `a:/path/to/a1,/path/to/a2 b:/path/to/b`,'
                          ' the file splitting (for each dataloader worker) will be performed per group,'
                          ' and then mixed together, to ensure a uniform mixing from all groups for each worker.'
                     )
@@ -34,7 +38,7 @@ parser.add_argument('-t', '--data-test', nargs='*', default=[],
                     help='testing files; supported syntax:'
                          ' (a) plain list, `--data-test /path/to/a/* /path/to/b/*`;'
                          ' (b) keyword-based, `--data-test a:/path/to/a/* b:/path/to/b/*`, will produce output_a, output_b;'
-                         ' (c) split output per N input files, `--data-test a%10:/path/to/a/*`, will split per 10 input files')
+                         ' (c) split output per N input files, `--data-test a%%10:/path/to/a/*`, will split per 10 input files')
 parser.add_argument('--data-fraction', type=float, default=1,
                     help='fraction of events to load from each file; for training, the events are randomly selected for each epoch')
 parser.add_argument('--file-fraction', type=float, default=1,
@@ -56,7 +60,8 @@ parser.add_argument('--demo', action='store_true', default=False,
 parser.add_argument('--lr-finder', type=str, default=None,
                     help='run learning rate finder instead of the actual training; format: ``start_lr, end_lr, num_iters``')
 parser.add_argument('--tensorboard', type=str, default=None,
-                    help='create a tensorboard summary writer with the given comment')
+                    #help='create a tensorboard summary writer with the given comment')
+                    help='create a tensorboard summary writer with the model name, under this directory')
 parser.add_argument('--tensorboard-custom-fn', type=str, default=None,
                     help='the path of the python script containing a user-specified function `get_tensorboard_custom_fn`, '
                          'to display custom information per mini-batch or per epoch, during the training, validation or test.')
@@ -66,7 +71,7 @@ parser.add_argument('-o', '--network-option', nargs=2, action='append', default=
                     help='options to pass to the model class constructor, e.g., `--network-option use_counts False`')
 parser.add_argument('-m', '--model-prefix', type=str, default='models/{auto}/network',
                     help='path to save or load the model; for training, this will be used as a prefix, so model snapshots '
-                         'will saved to `{model_prefix}_epoch-%d_state.pt` after each epoch, and the one with the best '
+                         'will saved to `{model_prefix}_epoch-%%d_state.pt` after each epoch, and the one with the best '
                          'validation metric to `{model_prefix}_best_epoch_state.pt`; for testing, this should be the full path '
                          'including the suffix, otherwise the one with the best validation metric will be used; '
                          'for training, `{auto}` can be used as part of the path to auto-generate a name, '
@@ -97,7 +102,7 @@ parser.add_argument('--lr-scheduler', type=str, default='flat+decay',
 parser.add_argument('--warmup-steps', type=int, default=0,
                     help='number of warm-up steps, only valid for `flat+linear` and `flat+cos` lr schedulers')
 parser.add_argument('--load-epoch', type=int, default=None,
-                    help='used to resume interrupted training, load model and optimizer state saved in the `epoch-%d_state.pt` and `epoch-%d_optimizer.pt` files')
+                    help='used to resume interrupted training, load model and optimizer state saved in the `epoch-%%d_state.pt` and `epoch-%%d_optimizer.pt` files')
 parser.add_argument('--start-lr', type=float, default=5e-3,
                     help='start learning rate')
 parser.add_argument('--batch-size', type=int, default=128,
@@ -139,18 +144,26 @@ def to_filelist(args, mode='train'):
     else:
         raise NotImplementedError('Invalid mode %s' % mode)
 
-    # keyword-based: 'a:/path/to/a b:/path/to/b'
+    # keyword-based:
+    # 'a:/path/to/a b:/path/to/b' OR
+    # 'a:/path/to/a1,/path/to/a2 b:/path/to/b'
     file_dict = {}
     for f in flist:
         if ':' in f:
-            name, fp = f.split(':')
+            name, fplist = f.split(':')
         else:
-            name, fp = '_', f
-        files = glob.glob(fp)
-        if name in file_dict:
-            file_dict[name] += files
-        else:
-            file_dict[name] = files
+            name, fplist = '_', f
+        
+        for fp in fplist.split(",") :
+            if (not len(fp)) :
+                continue
+            files = glob.glob(fp)
+            if (args.infile_prefix) :
+                files = [f"{args.infile_prefix}{_f}" for _f in files]
+            if name in file_dict:
+                file_dict[name] += files
+            else:
+                file_dict[name] = files
 
     # sort files
     for name, files in file_dict.items():
@@ -210,8 +223,10 @@ def train_load(args):
     _logger.info('Using %d files for validation, range: %s' % (len(val_files), str(val_range)))
 
     if args.demo:
-        train_files = train_files[:20]
-        val_files = val_files[:20]
+        #train_files = train_files[:20]
+        #val_files = val_files[:20]
+        train_files = random.choices(train_files, k=30)
+        val_files = random.choices(val_files, k=30)
         train_file_dict = {'_': train_files}
         val_file_dict = {'_': val_files}
         _logger.info(train_files)
@@ -706,7 +721,14 @@ def _main(args):
 
     if args.tensorboard:
         from weaver.utils.nn.tools import TensorboardHelper
-        tb = TensorboardHelper(tb_comment=args.tensorboard, tb_custom_fn=args.tensorboard_custom_fn)
+        #tb = TensorboardHelper(tb_comment=args.tensorboard, tb_custom_fn=args.tensorboard_custom_fn)
+        
+        tb_dir = args.tensorboard
+        
+        if (hasattr(args, "_auto_model_name") and args._auto_model_name) :
+            tb_dir = f"{args.tensorboard}/{args._auto_model_name}"
+        
+        tb = TensorboardHelper(tb_dir=tb_dir, tb_custom_fn=args.tensorboard_custom_fn)
     else:
         tb = None
 
@@ -857,10 +879,12 @@ def main():
     if '{auto}' in args.model_prefix or '{auto}' in args.log:
         import hashlib
         import time
-        model_name = time.strftime('%Y%m%d-%H%M%S') + "_" + os.path.basename(args.network_config).replace('.py', '')
+        import datetime
+        #model_name = time.strftime('%Y%m%d-%H%M%S') + "_" + os.path.basename(args.network_config).replace('.py', '')
+        model_name = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S") + "_" + os.path.basename(args.network_config).replace('.py', '')
         if len(args.network_option):
             model_name = model_name + "_" + hashlib.md5(str(args.network_option).encode('utf-8')).hexdigest()
-        model_name += '_{optim}_lr{lr}_batch{batch}'.format(lr=args.start_lr,
+        model_name += '_{optim}_lr{lr}_batch{batch}'.format(lr=str(args.start_lr).replace(".", "p"),
                                                             optim=args.optimizer, batch=args.batch_size)
         args._auto_model_name = model_name
         args.model_prefix = args.model_prefix.replace('{auto}', model_name)

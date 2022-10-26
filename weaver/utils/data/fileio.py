@@ -22,7 +22,7 @@ def _read_hdf5(filepath, branches, load_range=None):
 
 def _read_root(filepath, branches, load_range=None, treename=None):
     import uproot
-    with uproot.open(filepath) as f:
+    with uproot.open(filepath, xrootd_handler = uproot.MultithreadedXRootDSource) as f:
         if treename is None:
             treenames = set([k.split(';')[0] for k, v in f.items() if getattr(v, 'classname', '') == 'TTree'])
             if len(treenames) == 1:
