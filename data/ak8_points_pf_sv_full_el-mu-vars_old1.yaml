@@ -67,6 +67,48 @@ inputs:
          - [pfcand_btagSip3dVal, 0, 100]
          - [pfcand_btagSip3dSig, 0, 0.5]
          - [pfcand_btagJetDistVal, 0, 40]
+         
+         - pfcand_isElMatched
+         - [pfcand_el_IoEmIop, -0.0061, 58]
+         - [pfcand_el_deltaetain, -2.3e-05, 1.5e+02]
+         - [pfcand_el_deltaetaseed, -1.7e-05, 1.5e+02]
+         - [pfcand_el_deltaphiin, 0.00042, 34]
+         - [pfcand_el_eelepout, 1.6, 0.32]
+         - [pfcand_el_ep, 2.5, 0.28]
+         - [pfcand_el_expectedInnerHits, 0.13, 1.4]
+         - [pfcand_el_fbrem, 0.13, 1.2]
+         - [pfcand_el_gsfchi2, 1.2, 0.5]
+         - [pfcand_el_gsfhits, 12, 0.53]
+         - [pfcand_el_he, 0.23, 2]
+         - [pfcand_el_kfchi2, 1.1, 1.6]
+         - [pfcand_el_kfhits, 11, 0.24]
+         #- [pfcand_el_miniPFRelIso_all, 1.4, 0.12]
+         #- [pfcand_el_miniPFRelIso_chg, 0.91, 0.2]
+         - [pfcand_el_oldcircularity, 0.36, 5.7]
+         - [pfcand_el_oldhe, 0.45, 0.67]
+         - [pfcand_el_oldr9, 0.83, 4.9]
+         - [pfcand_el_oldsigmaietaieta, 0.014, 1.7e+02]
+         - [pfcand_el_oldsigmaiphiiphi, 0.017, 2.0e+02]
+         - [pfcand_el_pfChargedHadMiniIso, 1.0e+02, 0.0084]
+         - [pfcand_el_pfNeutralHadMiniIso, 0.013, 0.23]
+         - [pfcand_el_pfPhotonMiniIso, 65, 0.0065]
+         - [pfcand_el_scletawidth, 0.011, 2.3e+02]
+         - [pfcand_el_sclphiwidth, 0.033, 34]
+         
+         - pfcand_isMuMatched
+         #- [pfcand_mu_miniPFRelIso_all, 15, 0.022]
+         #- [pfcand_mu_miniPFRelIso_chg, 7.7, 0.041]
+         - [pfcand_mu_miniPfIsoCH, 1.2e+02, 0.0054]
+         - [pfcand_mu_miniPfIsoNH, 0.58, 0.033]
+         - [pfcand_mu_miniPfIsoPh, 36, 0.0086]
+         - [pfcand_mu_nMatchedStations, 1.7, 0.59]
+         - [pfcand_mu_nTrackerLayers, 12, 0.29]
+         - [pfcand_mu_nValidMuonHits, 16, 0.055]
+         - [pfcand_mu_nValidPixelHits, 3.3, 0.47]
+         - [pfcand_mu_normChi2, 1.2, 0.33]
+         - [pfcand_mu_segCompat, 0.79, 2.2]
+
+         
    pf_mask:
       length: 100
       vars: 
@@ -138,6 +180,7 @@ observers:
    - pfParticleNetJetTags_probTbq
    - pfParticleNetJetTags_probTbqq
    - pfParticleNetJetTags_probTbta
+
 
 weights:
    ### [option 1] use precomputed weights stored in the input files

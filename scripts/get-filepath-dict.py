@@ -37,12 +37,20 @@ def main() :
         "--keydepth",
         help = "Will use the directory name at <keydepth> level (counting from 1) as the key: /level-1/level-2/.../level-keydepth/.../",
         type = int,
-        required = True,
-        #default = None,
+        required = False,
+        default = 11,
     )
     
     parser.add_argument(
-        "--suffix",
+        "--ksuffix",
+        help = "Will append this to the keys. For e.g. '%%N' will be used to split per N files. Using '%%1' is reccommended if the event count per file is to be used for proper normalization when combining samples.",
+        type = str,
+        required = False,
+        default = "%1",
+    )
+    
+    parser.add_argument(
+        "--psuffix",
         help = "Will append this to the paths",
         type = str,
         required = False,
@@ -83,7 +91,7 @@ def main() :
         
         key = path.split("/")[keydepth]
         
-        l_keyed_path.append(f"{key}:{path}{args.suffix}")
+        l_keyed_path.append(f"{key}{args.ksuffix}:{path}{args.psuffix}")
     
     print("\n".join(l_keyed_path)+"\n")
 

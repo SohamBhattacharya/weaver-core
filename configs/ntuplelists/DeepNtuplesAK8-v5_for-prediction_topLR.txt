@@ -1,0 +1,17 @@
+#Wprimetotb_M2000W20_LH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb_M2000W20_LH_*/*/*/*/*.root
+#Wprimetotb_M2000W20_RH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb_M2000W20_RH_*/*/*/*/*.root
+#Wprimetotb_M3000W30_LH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb_M3000W30_LH_*/*/*/*/*.root
+#Wprimetotb_M3000W30_RH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb_M3000W30_RH_*/*/*/*/*.root
+#Wprimetotb_M6000W60_LH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb_M6000W60_LH_*/*/*/*/*.root
+#Wprimetotb_M6000W60_RH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb_M6000W60_RH_*/*/*/*/*.root
+
+#TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v4/TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/DeepNtuplesAK8-v4_RunIISummer20UL18MiniAODv2-106X_v16-v2/221207_162221/*/*.root
+#TTJets_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v4/TTJets_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/DeepNtuplesAK8-v4_RunIISummer20UL18MiniAODv2-106X_v16-v2/221207_162230/*/*.root
+#TTJets_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v4/TTJets_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8/DeepNtuplesAK8-v4_RunIISummer20UL18MiniAODv2-106X_v16-v2/221207_162239/*/*.root
+#TTJets_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v4/TTJets_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/DeepNtuplesAK8-v4_RunIISummer20UL18MiniAODv2-106X_v16-v2/221207_162248/*/*.root
+
+TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8/DeepNtuplesAK8-v5_RunIISummer20UL18MiniAODv2-106X_v16-v1/230413_143705/*/*.root
+TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8/DeepNtuplesAK8-v5_RunIISummer20UL18MiniAODv2-106X_v16-v2/230413_143648/*/*.root
+
+#ST_t-channel_antitop_5f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/ST_t-channel_antitop_5f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8/DeepNtuplesAK8-v5_RunIISummer20UL18MiniAODv2-106X_v16-v1/230412_215207/*/*.root
+#ST_t-channel_top_5f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/ST_t-channel_top_5f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8/DeepNtuplesAK8-v5_RunIISummer20UL18MiniAODv2-106X_v16-v1/230412_215222/*/*.root

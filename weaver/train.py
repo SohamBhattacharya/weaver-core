@@ -286,6 +286,8 @@ def test_load(args):
         else:
             name, fp = '', f
         files = glob.glob(fp)
+        if (args.infile_prefix) :
+                files = [f"{args.infile_prefix}{_f}" for _f in files]
         if name in file_dict:
             file_dict[name] += files
         else:
@@ -565,9 +567,20 @@ def model_setup(args, data_config):
     model, model_info = network_module.get_model(data_config, **network_options)
     if args.load_model_weights:
         model_state = torch.load(args.load_model_weights, map_location='cpu')
-        missing_keys, unexpected_keys = model.load_state_dict(model_state, strict=False)
+        #print({_k: _v.size() for _k, _v in model_state.items()})
+        #print({_k: _v.size() for _k, _v in model.state_dict().items()})
+        
+        # Filter out keys that do not match in shape. For e.g. if the loaded model has different number of output classes.
+        filtered_state = {}
+        model_dict = model.state_dict()
+        for k, v in model_state.items():
+            if (k in model_dict) and (v.size() == model_dict[k].size()):
+                filtered_state[k] = v
+        #print(filtered_state)
+        missing_keys, unexpected_keys = model.load_state_dict(filtered_state, strict=False)
         _logger.info('Model initialized with weights from %s\n ... Missing: %s\n ... Unexpected: %s' %
                      (args.load_model_weights, missing_keys, unexpected_keys))
+        _logger.info(f'Loaded keys: {list(filtered_state.keys())}')
     # _logger.info(model)
     flops(model, model_info)
     # loss function

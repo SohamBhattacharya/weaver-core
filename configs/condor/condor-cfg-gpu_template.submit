@@ -14,4 +14,6 @@ Request_GPUs = 1
 request_memory = 30GB
 +RequestRuntime = 345600
 
+max_retries = 5
+
 queue

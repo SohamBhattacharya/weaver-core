@@ -30,8 +30,8 @@ inputs:
    pf_points:
       length: 100
       vars: 
-         - pfcand_etarel
-         - pfcand_phirel
+         - pfcand_LBGS_x
+         - pfcand_LBGS_y
    pf_features:
       length: 100
       vars: 
@@ -44,6 +44,9 @@ inputs:
       ###              pad_value(optional, default=0)]
          - [pfcand_pt_log_nopuppi, 1, 0.5]
          - [pfcand_e_log_nopuppi, 1.3, 0.5]
+         - pfcand_LBGS_x
+         - pfcand_LBGS_y
+         - pfcand_LBGS_enFrac
          - pfcand_etarel
          - pfcand_phirel
          - [pfcand_abseta, 0.6, 1.6]
@@ -138,6 +141,7 @@ observers:
    - pfParticleNetJetTags_probTbq
    - pfParticleNetJetTags_probTbqq
    - pfParticleNetJetTags_probTbta
+
 
 weights:
    ### [option 1] use precomputed weights stored in the input files

@@ -112,13 +112,13 @@ def main() :
     out_tag = "%s_%s" %(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"), args.name)
     dirname = "%s" %(out_tag)
     
-    condorDir = "%s/%s" %(args.condordir, dirname)
-    l_cmd.append("mkdir -p %s" %(condorDir))
+    condordir = "%s/%s" %(args.condordir, dirname)
+    l_cmd.append("mkdir -p %s" %(condordir))
     
-    networkconfig = "%s/%s" %(condorDir, networkconfig_name)
-    dataconfig = "%s/%s" %(condorDir, dataconfig_name)
-    condorconfig = "%s/%s" %(condorDir, condorconfig_name)
-    condorscript = "%s/%s" %(condorDir, condorscript_name)
+    networkconfig = "%s/%s" %(condordir, networkconfig_name)
+    dataconfig = "%s/%s" %(condordir, dataconfig_name)
+    condorconfig = "%s/%s" %(condordir, condorconfig_name)
+    condorscript = "%s/%s" %(condordir, condorscript_name)
     
     
     l_cmd.extend([
@@ -132,9 +132,9 @@ def main() :
     
     run_cmd_list(l_cmd)
     
-    condor_log = "%s/job.log" %(condorDir)
-    condor_out = "%s/job.out" %(condorDir)
-    condor_err = "%s/job.err" %(condorDir)
+    condor_log = "%s/job.log" %(condordir)
+    condor_out = "%s/job.out" %(condordir)
+    condor_err = "%s/job.err" %(condordir)
     
     d_format = {
         "@cwd@": cwd,
@@ -153,7 +153,7 @@ def main() :
     
     
     print("")
-    print("Created directory: %s" %(condorDir))
+    print("Created directory: %s" %(condordir))
     
     print("Log file:          %s" %(condor_log))
     print("Out file:          %s" %(condor_out))

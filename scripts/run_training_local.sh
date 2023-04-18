@@ -6,7 +6,7 @@ MODELDIR="/nfs/dust/cms/user/sobhatta/work/TopTagPol/weaver-core/output/testrun/
 #--data-train "/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v0/*/*/*/*/output_*.root" \
 #--data-test  "/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v0/*/*/*/*/output_*.root" \
 
-#python weaver/train.py \
+#python -u weaver/train.py \
 #--data-train \
 #    TTJets_HT-600to800:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v1/TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/DeepNtuplesAK8-v1_RunIISummer20UL18MiniAODv2-106X_v16-v2/220914_115302/*/*.root \
 #    QCD_Pt_470to600:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v1/QCD_Pt_470to600_TuneCP5_13TeV_pythia8/DeepNtuplesAK8-v1_RunIISummer20UL18MiniAODv2-106X_v16-v1/220914_113620/*/*.root \
@@ -32,11 +32,12 @@ MODELDIR="/nfs/dust/cms/user/sobhatta/work/TopTagPol/weaver-core/output/testrun/
 #--infile-prefix "root://dcache-cms-xrootd.desy.de/" \
 
 
-python weaver/train.py \
+python -u weaver/train.py \
 --data-train \
-    TTJets_HT-600to800:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v1/TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/DeepNtuplesAK8-v1_RunIISummer20UL18MiniAODv2-106X_v16-v2/220914_115302/*/*.root \
-    QCD_Pt_470to600:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v1/QCD_Pt_470to600_TuneCP5_13TeV_pythia8/DeepNtuplesAK8-v1_RunIISummer20UL18MiniAODv2-106X_v16-v1/220914_113620/*/*.root \
---data-config data/ak8_points_pf_sv_full.yaml \
+Wprimetotb_LH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb*_LH_*/*/*/*/*.root \
+Wprimetotb_RH:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v5/Wprimetotb*_RH_*/*/*/*/*.root \
+--infile-prefix "root://dcache-cms-xrootd.desy.de/" \
+--data-config data/ak8_points_pf_sv_full_topLR_el-mu-vars.yaml \
 --network-config weaver/networks/particle_net_pf_sv.py \
 --model-prefix $MODELDIR/result \
 --gpus 0 \
@@ -45,6 +46,7 @@ python weaver/train.py \
 --num-epochs 2 \
 --optimizer ranger \
 --num-workers 5 \
---tensorboard "tensorboard/testrun" \
+--tensorboard "tensorboard/testrun/{auto}" \
 --log logs/{auto}.log \
+--load-model-weights output/2023-02-18_17-53-30_particlenet_el-mu-vars-subset/result_epoch-47_state.pt \
 --demo \
