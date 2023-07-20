@@ -1,0 +1,10 @@
+TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/TTJets_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/*/*/*/*.root
+TTJets_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/TTJets_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/*/*/*/*.root
+TTJets_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/TTJets_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8/*/*/*/*.root
+TTJets_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/TTJets_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/*/*/*/*.root
+
+TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/TT_Mtt-1000toInf_TuneCP5_13TeV-powheg-pythia8/*/*/*/*.root
+TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/TT_Mtt-700to1000_TuneCP5_13TeV-powheg-pythia8/*/*/*/*.root
+
+ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/*/*/*/*.root
+ST_t-channel_top_4f_InclusiveDecays_TuneCP5_13TeV-powheg-pythia8%1:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/ST_t-channel_top_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/*/*/*/*.root

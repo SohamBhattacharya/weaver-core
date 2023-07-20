@@ -14,7 +14,7 @@ SCRIPTARGS=$2
 MODELSTATE="output/"$MODELNAME"/""result_best_epoch_state.pt"
 NETWORKCONFIG="condor_jobs/training/"$MODELNAME"/particle_net_pf_sv.py"
 DATACONFIG="condor_jobs/training/"$MODELNAME"/ak8_points_pf_sv_full.yaml"
-SAMPLETAG="DeepNtuplesAK8-v4"
+SAMPLETAG="DeepNtuplesAK8-v6"
 SAMPLELIST="configs/ntuplelists/"$SAMPLETAG"_for-prediction_topTag.txt"
 
 FLIST=( $MODELSTATE $NETWORKCONFIG $DATACONFIG $SAMPLELIST )

@@ -1,0 +1,6 @@
+Wprimetotb_M2000W20_LH_TuneCP5_13TeV-madgraph-pythia8:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/Wprimetotb_M2000W20_LH_*/*/*/*/*.root
+Wprimetotb_M2000W20_RH_TuneCP5_13TeV-madgraph-pythia8:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/Wprimetotb_M2000W20_RH_*/*/*/*/*.root
+Wprimetotb_M3000W30_LH_TuneCP5_13TeV-madgraph-pythia8:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/Wprimetotb_M3000W30_LH_*/*/*/*/*.root
+Wprimetotb_M3000W30_RH_TuneCP5_13TeV-madgraph-pythia8:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/Wprimetotb_M3000W30_RH_*/*/*/*/*.root
+Wprimetotb_M6000W60_LH_TuneCP5_13TeV-madgraph-pythia8:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/Wprimetotb_M6000W60_LH_*/*/*/*/*.root
+Wprimetotb_M6000W60_RH_TuneCP5_13TeV-madgraph-pythia8:/pnfs/desy.de/cms/tier2/store/user/sobhatta/TopTagPol/DeepNtuples/v6/Wprimetotb_M6000W60_RH_*/*/*/*/*.root

@@ -13,11 +13,11 @@ SCRIPTARGS=$2
 
 MODELSTATE="output/"$MODELNAME"/""result_best_epoch_state.pt"
 NETWORKCONFIG="condor_jobs/training/"$MODELNAME"/particle_net_pf_sv.py"
-#DATACONFIG="condor_jobs/training/"$MODELNAME"/ak8_points_pf_sv_full_topLR_el-mu-vars.yaml"
-#DATACONFIG="condor_jobs/training/"$MODELNAME"/ak8_points_pf_sv_full_topLR_el-mu-vars_test-fullstat.yaml"
-DATACONFIG="condor_jobs/training/"$MODELNAME"/ak8_points_pf_sv_full_topLR_el-mu-vars_forNonWprime.yaml"
-SAMPLETAG="DeepNtuplesAK8-v5"
-SAMPLELIST="configs/ntuplelists/"$SAMPLETAG"_for-prediction_topLR.txt"
+DATACONFIG="condor_jobs/training/"$MODELNAME"/ak8_points_pf_sv_full_topLR_el-mu-vars_test-fullstat.yaml"
+#DATACONFIG="condor_jobs/training/"$MODELNAME"/ak8_points_pf_sv_full_topLR_el-mu-vars_test-fullstat_non-Wprime.yaml"
+SAMPLETAG="DeepNtuplesAK8-v6"
+SAMPLELIST="configs/ntuplelists/"$SAMPLETAG"_for-prediction_topLR_Wprime.txt"
+#SAMPLELIST="configs/ntuplelists/"$SAMPLETAG"_for-prediction_topLR_non-Wprime.txt"
 
 FLIST=( $MODELSTATE $NETWORKCONFIG $DATACONFIG $SAMPLELIST )
 file_missing=false
